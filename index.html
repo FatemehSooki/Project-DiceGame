@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <link rel="stylesheet" href="master.css">
+</head>
+
+<body>
+ <button>Instruction</button>
+
+ <div class="design">
+  <div></div>
+  <div></div>
+  <div></div>
+ </div>
+
+
+ <div class="dice dice1">
+
+  <div><span class="center"></span></div>
+
+  <div><span class="tl"></span><span class="br"></span></div>
+
+  <div><span class="tl"></span><span class="tr"></span><span class="cl"></span><span class="cr"></span><span
+    class="bl"></span><span class="br"></span></div>
+
+  <div><span class="tl"></span><span class="tr"></span><span class="center"></span><span class="bl"></span><span
+    class="br"></span></div>
+
+  <div><span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span></div>
+
+  <div><span class="tl"></span><span class="center"></span><span class="br"></span></div>
+
+ </div>
+
+
+
+
+ <div class="dice dice2">
+  <div><span class="center"></span></div>
+
+  <div><span class="tl"></span><span class="br"></span></div>
+
+  <div><span class="tl"></span><span class="tr"></span><span class="cl"></span><span class="cr"></span><span
+    class="bl"></span><span class="br"></span></div>
+
+  <div><span class="tl"></span><span class="tr"></span><span class="center"></span><span class="bl"></span><span
+    class="br"></span></div>
+
+  <div><span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span></div>
+
+  <div><span class="tl"></span><span class="center"></span><span class="br"></span></div>
+ </div>
+
+
+ <div class="scores">
+  <h2></h2>
+  <h2></h2>
+ </div>
+</body>
+
+<script>
+ document.querySelector('button').addEventListener('click', () => {
+  alert('1- Each player has one turn and must wait for the other player to roll their turn 2- whoever reaches the score "5" is the winner')
+ })
+
+ let result = document.querySelectorAll('.scores>h2')
+ let dice1 = document.querySelector('.dice1')
+ let dice2 = document.querySelector('.dice2')
+ let face = document.querySelectorAll('.dice1>div')
+ let face1 = document.querySelectorAll('.dice2>div')
+ let clone2 = face[1].innerHTML
+
+ let x1 = 0
+ let x2 = 0
+
+ result[0].innerHTML = 0
+ result[1].innerHTML = 0
+
+ let flag = 1
+ dice1.addEventListener('click', () => {
+  if (flag % 2) {
+   x1 = parseInt((Math.random() * 6) + 1)
+   // result[0].innerHTML = x1
+
+
+   dice1.classList.remove('shuffle')
+   setTimeout(() => {
+    dice1.classList.add('shuffle')
+   }, 10);
+
+
+   setTimeout(() => {
+    if (x1 == '1') {
+     face[1].innerHTML = ''
+     face[1].innerHTML = face[0].innerHTML
+    } else if (x1 == '3') {
+     face[1].innerHTML = ''
+     face[1].innerHTML = face[5].innerHTML
+    } else if (x1 == '4') {
+     face[1].innerHTML = ''
+     face[1].innerHTML = face[4].innerHTML
+    } else if (x1 == '5') {
+     face[1].innerHTML = ''
+     face[1].innerHTML = face[3].innerHTML
+    } else if (x1 == '6') {
+     face[1].innerHTML = ''
+     face[1].innerHTML = face[2].innerHTML
+    } else {
+     face[1].innerHTML = ''
+     face[1].innerHTML = clone2
+    }
+   }, 2000);
+  }
+  flag++
+
+ })
+
+
+
+
+
+ dice2.addEventListener('click', () => {
+  if (flag % 2 !== 1) {
+   x2 = parseInt((Math.random() * 6) + 1)
+   // result[1].innerHTML = x2
+
+   dice2.classList.remove('shuffle')
+   setTimeout(() => {
+    dice2.classList.add('shuffle')
+   }, 10);
+
+
+   setTimeout(() => {
+    if (x2 == '1') {
+     face1[1].innerHTML = ''
+     face1[1].innerHTML = face[0].innerHTML
+    } else if (x2 == '3') {
+     face1[1].innerHTML = ''
+     face1[1].innerHTML = face[5].innerHTML
+    } else if (x2 == '4') {
+     face1[1].innerHTML = ''
+     face1[1].innerHTML = face[4].innerHTML
+    } else if (x2 == '5') {
+     face1[1].innerHTML = ''
+     face1[1].innerHTML = face[3].innerHTML
+    } else if (x2 == '6') {
+     face1[1].innerHTML = ''
+     face1[1].innerHTML = face[2].innerHTML
+    } else {
+     face1[1].innerHTML = ''
+     face1[1].innerHTML = clone2
+    }
+    compare()
+   }, 2000);
+  }
+  flag++
+ })
+
+ function compare() {
+  if (x1 > x2) {
+   result[0].innerHTML++
+  } else if (x2 > x1) {
+   result[1].innerHTML++
+  }
+
+  setTimeout(() => {
+   if (result[0].innerHTML >= 5) {
+    alert('player 1 WON!!!')
+    resetGame()
+   } else if (result[1].innerHTML >= 5) {
+    alert('player 2 WON!!!')
+    resetGame()
+   }
+  }, 1000);
+ }
+
+
+ function resetGame() {
+  let x1 = 0
+  let x2 = 0
+  result[0].innerHTML = 0
+  result[1].innerHTML = 0
+  let flag = 1
+ }
+</script>
+
+</html>
